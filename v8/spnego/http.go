@@ -15,14 +15,14 @@ import (
 
 	"github.com/jcmturner/gofork/encoding/asn1"
 	"github.com/jcmturner/goidentity/v6"
-	"github.com/jcmturner/gokrb5/v8/client"
-	"github.com/jcmturner/gokrb5/v8/credentials"
-	"github.com/jcmturner/gokrb5/v8/gssapi"
-	"github.com/jcmturner/gokrb5/v8/iana/nametype"
-	"github.com/jcmturner/gokrb5/v8/keytab"
-	"github.com/jcmturner/gokrb5/v8/krberror"
-	"github.com/jcmturner/gokrb5/v8/service"
-	"github.com/jcmturner/gokrb5/v8/types"
+	"github.com/wangzhengzh/gokrb5/v8/client"
+	"github.com/wangzhengzh/gokrb5/v8/credentials"
+	"github.com/wangzhengzh/gokrb5/v8/gssapi"
+	"github.com/wangzhengzh/gokrb5/v8/iana/nametype"
+	"github.com/wangzhengzh/gokrb5/v8/keytab"
+	"github.com/wangzhengzh/gokrb5/v8/krberror"
+	"github.com/wangzhengzh/gokrb5/v8/service"
+	"github.com/wangzhengzh/gokrb5/v8/types"
 )
 
 // Client side functionality //
@@ -230,9 +230,9 @@ const (
 	// spnegoNegTokenRespIncompleteKRB5 - Response token specifying incomplete context and KRB5 as the supported mechtype.
 	spnegoNegTokenRespIncompleteKRB5 = "Negotiate oRQwEqADCgEBoQsGCSqGSIb3EgECAg=="
 	// sessionCredentials is the session value key holding the credentials jcmturner/goidentity/Identity object.
-	sessionCredentials = "github.com/jcmturner/gokrb5/v8/sessionCredentials"
+	sessionCredentials = "github.com/wangzhengzh/gokrb5/v8/sessionCredentials"
 	// ctxCredentials is the SPNEGO context key holding the credentials jcmturner/goidentity/Identity object.
-	ctxCredentials = "github.com/jcmturner/gokrb5/v8/ctxCredentials"
+	ctxCredentials = "github.com/wangzhengzh/gokrb5/v8/ctxCredentials"
 	// HTTPHeaderAuthRequest is the header that will hold authn/z information.
 	HTTPHeaderAuthRequest = "Authorization"
 	// HTTPHeaderAuthResponse is the header that will hold SPNEGO data from the server.

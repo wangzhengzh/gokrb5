@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jcmturner/gokrb5/v8/iana/errorcode"
-	"github.com/jcmturner/gokrb5/v8/messages"
+	"github.com/wangzhengzh/gokrb5/v8/iana/errorcode"
+	"github.com/wangzhengzh/gokrb5/v8/messages"
 )
 
 // SendToKDC performs network actions to send data to the KDC.
