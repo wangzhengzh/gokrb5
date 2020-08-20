@@ -73,11 +73,15 @@ func (kt *Keytab) GetEncryptionKey(princName types.PrincipalName, realm string, 
 	var key types.EncryptionKey
 	var t time.Time
 	var kv int
+
+	// not check kvno, by dennis wang
+	var found = false
 	for _, k := range kt.Entries {
 		if k.Principal.Realm == realm && len(k.Principal.Components) == len(princName.NameString) &&
 			k.Key.KeyType == etype &&
 			(k.KVNO == uint32(kvno) || kvno == 0) &&
 			k.Timestamp.After(t) {
+
 			p := true
 			for i, n := range k.Principal.Components {
 				if princName.NameString[i] != n {
@@ -86,12 +90,43 @@ func (kt *Keytab) GetEncryptionKey(princName types.PrincipalName, realm string, 
 				}
 			}
 			if p {
+				// not check kvno, by dennis wang
+				found = true
 				key = k.Key
 				kv = int(k.KVNO)
 				t = k.Timestamp
 			}
 		}
 	}
+	if !found {
+		// not check kvno, by dennis wang
+		// try again
+		kvno = 0
+
+		for _, k := range kt.Entries {
+			if k.Principal.Realm == realm && len(k.Principal.Components) == len(princName.NameString) &&
+				k.Key.KeyType == etype &&
+				(k.KVNO == uint32(kvno) || kvno == 0) &&
+				k.Timestamp.After(t) {
+
+				p := true
+				for i, n := range k.Principal.Components {
+					if princName.NameString[i] != n {
+						p = false
+						break
+					}
+				}
+				if p {
+					// not check kvno, by dennis wang
+					found = true
+					key = k.Key
+					kv = int(k.KVNO)
+					t = k.Timestamp
+				}
+			}
+		}
+	}
+
 	if len(key.KeyValue) < 1 {
 		return key, 0, fmt.Errorf("matching key not found in keytab. Looking for %v realm: %v kvno: %v etype: %v", princName.NameString, realm, kvno, etype)
 	}
